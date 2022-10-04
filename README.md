@@ -52,13 +52,16 @@ Numeric values can use the following mathematical operators.
 
 Operator | Function
 :------: | :-------
-+        | Addition
--        | Subtraction
+\+        | Addition
+\-        | Subtraction
 \*        | Multiplication
 /        | Division
 %/%      | Integer Division (divide and keep only whole portion of result)
 %%       | Modulus (remainder from integer division)
 ^        | Exponent
 
-All these operators can be used infix (between the two numbers) or as a prefix (function format). Use backticks (`) around these operators if using as prefixes, e.g., ``+`(2, 2) == 2 + 2`
+All these operators can be used infix (between the two numbers) or as a prefix (function format). Use backticks (\`\) around these operators if using as prefixes, e.g., 
+```R
+`+`(2, 2) == 2 + 2
+```
 
