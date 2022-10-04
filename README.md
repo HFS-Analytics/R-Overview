@@ -54,7 +54,7 @@ Operator | Function
 :------: | :-------
 +        | Addition
 -        | Subtraction
-*        | Multiplication
+\*        | Multiplication
 /        | Division
 %/%      | Integer Division (divide and keep only whole portion of result)
 %%       | Modulus (remainder from integer division)
