@@ -83,7 +83,8 @@ The reason for this is that `NA` represents complete uncertainty about the value
 
 ## Assignment
 
-R has two primary assignment operators, which tie a name to a value. `<-` is the most common and creates a variable with the requested name, e.g. `myDog <- "Fido"` or ```R
+R has two primary assignment operators, which tie a name to a value. `<-` is the most common and creates a variable with the requested name, e.g. `myDog <- "Fido"` or 
+```R
 circle.radius <- 10
 circle.area   <- pi * circle.radius ^ 2
 ```
@@ -112,4 +113,46 @@ Most of the time, you will work with collections of data with one or more dimens
 length(10) # yields 1
 ```
 
-Use `c()` to create a one-dimensional vector of values
+## Vectors
+
+Use `c()` to create a one-dimensional vector of values. The values in the vector can be named.
+
+```R
+vector_with_no_name <- c(1, 4, 7, 2)
+named_vector <- c(first = 2, second = 5, next = 8, last = 12)
+```
+
+The `:` operator will also fill out integer ranges between the two arguments.
+```R
+1:10 # yields [1]  1  2  3  4  5  6  7  8  9 10
+
+# use seq() for more control
+seq(from = 0, to = 98, by = 7) # count by 7s from 0 to 98
+seq(from = 0, to = 100, length.out = 11) # create a sequence of 11 evenly-spaced values from 0 to 100 inclusive.
+```
+
+Most mathematical operations are vectorized, meaning no extra work on your end is required to generalize from `2 + 2` to  `seq(from = 0, to = 98, by = 7) + 2`. There is a recycling rule in place, meaning that values from the shorter vector cycle through until the end of the longer vector is reached.
+
+```R
+{1:10} + {1:2}
+# is equivalent to
+c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) + c(1, 2, 1, 2, 1, 2, 1, 2, 1, 2)
+
+{1:10} + {1:3} # will produce a result, but warn that the longer vector is not evenly divisble, so some value is left over at the end.
+```
+
+## Data Frames
+
+Data frames are the most common collection you'll see. These are tabular collections (ordered into rows and columns). Every row must have the same number of columns and every column the same number of rows. Columns represent attributes and rows observations. For example, the `mtcars` dataset presents specifications for 32 models of cars. Each column has a name, and rows may also have names (though this is much less common).
+
+You can access a single column from a data frame by name using the `$` operator: `mtcars$mpg`. See Lesson 2 for detail on the `subset` function for more flexible extraction.
+
+You can construct a data frame from vectors using the `data.frame` function.
+
+```R
+randomData <- data.frame(
+  x = rnorm(n = 10, mean = 100, sd = 15) # normal random variable
+  y = runif(n = 10, min = 0, max = 100) # uniform random variable
+  z = rbinom(n = 10, size = 1, prob = .5) # Bernoulli random variable (10 fair coin flips)
+)
+```
