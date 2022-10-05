@@ -145,14 +145,30 @@ c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) + c(1, 2, 1, 2, 1, 2, 1, 2, 1, 2)
 
 Data frames are the most common collection you'll see. These are tabular collections (ordered into rows and columns). Every row must have the same number of columns and every column the same number of rows. Columns represent attributes and rows observations. For example, the `mtcars` dataset presents specifications for 32 models of cars. Each column has a name, and rows may also have names (though this is much less common).
 
-You can access a single column from a data frame by name using the `$` operator: `mtcars$mpg`. See Lesson 2 for detail on the `subset` function for more flexible extraction.
+You can access a single column from a data frame by name using the `$` operator: `mtcars$mpg`. Rows, columns, and cells from a data frame can also be accessed using indices in the form `dataframe[row, column]`, e.g., `mtcars[1, 1]` or `mtcars["Mazda RX4", "mpg"]`. See Lesson 2 for detail on the `subset` function for more flexible/intuitive extraction.
 
 You can construct a data frame from vectors using the `data.frame` function.
 
 ```R
 randomData <- data.frame(
-  x = rnorm(n = 10, mean = 100, sd = 15) # normal random variable
-  y = runif(n = 10, min = 0, max = 100) # uniform random variable
+  x = rnorm(n = 10, mean = 100, sd = 15), # normal random variable
+  y = runif(n = 10, min = 0, max = 100), # uniform random variable
   z = rbinom(n = 10, size = 1, prob = .5) # Bernoulli random variable (10 fair coin flips)
 )
+```
+
+Row and column names for data frames can be retrieved and overwritten using `colnames` and `rownames`.
+
+```R
+colnames(randomData) # yields [1] "x" "y" "z"
+colnames(randomData) <- c("Larry", "Moe", "Curly") # changes the column names in randomData
+
+rownames(mtcars) # retrieves the names for each row of mtcars (32 in all)
+```
+
+`with` sets a context for calculations within a data frame, saving the trouble of retyping the data frame name and the $ operator.
+
+```R
+mtcars$gear * mtcars$carb # is equivalent to:
+with(mtcars, gear * carb)
 ```
